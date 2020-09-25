@@ -9,13 +9,46 @@ class App extends Component {
         super(props);
         this.state = {
             weatherInfo: null,
+            todayForecast: null,
+            groupedForecast: null,
         }
 
     }
 
-    isToday = (today, date) => {
-        const dateFormatted = new Date(date * 1000);
-        return (today.toDateString() === dateFormatted.toDateString());
+    isToday = (date) => {
+        const today = new Date().setHours(0, 0, 0, 0);
+        const thatDay = new Date(date * 1000).setHours(0, 0, 0, 0);
+
+        return (today === thatDay);
+    }
+
+    addDayOfWeek = (item) => {
+        const a = new Date(item.dt*1000);
+        const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+        const dayOfWeek = days[a.getDay()];
+
+        item.dayOfweek = dayOfWeek;
+    }
+
+
+
+    groupBy = (array) => {
+
+        const grouped = {};
+        array.forEach(function(item) {
+            const date = item.dt_txt.slice(8,10);
+            if(!grouped.hasOwnProperty(date)) {
+                this.addDayOfWeek(item);
+                const items = [];
+                items.push(item);
+                grouped[date] = items;
+            }
+            else {
+                grouped[date].push(item);
+            }
+        }, this);
+
+        return grouped;
     }
 
 
@@ -53,10 +86,10 @@ class App extends Component {
                     icon: data1.weather[0].icon,
                 };
 
-                const today = new Date();
-                const todayForecast = data2.list.filter(item => this.isToday(today, item.dt));
+                const todayForecast = data2.list.filter(item => this.isToday(item.dt));
+                const groupedForecast = this.groupBy(data2.list);
 
-              this.setState({weatherInfo, todayForecast});
+              this.setState({weatherInfo, todayForecast, groupedForecast});
             }).catch(error => {
             console.log(error);
 
@@ -69,11 +102,13 @@ class App extends Component {
 
 
     render() {
-        const {weatherInfo, todayForecast} = this.state;
+        const {weatherInfo, todayForecast, groupedForecast} = this.state;
         return <div className="App">
             <h1>Weather Forecast</h1>
-            {weatherInfo && <ResultsContainer weatherInfo={weatherInfo}
-                              todayForecast={todayForecast}/>}
+            {weatherInfo && <ResultsContainer
+                weatherInfo={weatherInfo}
+                todayForecast={todayForecast}
+                groupedForecast={groupedForecast}/>}
         </div>
     };
 }

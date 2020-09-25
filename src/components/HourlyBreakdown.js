@@ -35,8 +35,6 @@ const HourWeatherIcon = styled.img`
 
 const HourlyBreakDown = ({forecast}) => {
 
-    console.log(forecast);
-
     const list = forecast.map(function (item) {
         const hour = item.dt_txt.substring(11, 16);
         const temp = Math.floor(item.main.temp);
