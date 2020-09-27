@@ -15,7 +15,6 @@ const FiveDayDataPoint = styled.div`
 
 const FiveDayForecast = ({forecast}) => {
 
-    console.log(forecast);
     const forecastComponents = [];
 
     for (const property in forecast) {

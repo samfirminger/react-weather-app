@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import '../App.css';
 import ResultsContainer from './ResultsContainer'
+import SearchBar from './SearchBar'
 
 
 class App extends Component {
@@ -11,6 +12,8 @@ class App extends Component {
             weatherInfo: null,
             todayForecast: null,
             groupedForecast: null,
+            city: '',
+            country: '',
         }
 
     }
@@ -23,27 +26,33 @@ class App extends Component {
     }
 
     addDayOfWeek = (item) => {
-        const a = new Date(item.dt*1000);
-        const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+        const a = new Date(item.dt * 1000);
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         const dayOfWeek = days[a.getDay()];
 
         item.dayOfweek = dayOfWeek;
     }
 
-
+    handleInputChange = ({suggestion}) => {
+        console.log(suggestion);
+        this.setState({
+            city: suggestion.name,
+            country: suggestion.countryCode
+        });
+        this.makeCall(this.state.city, this.state.country);
+    };
 
     groupBy = (array) => {
 
         const grouped = {};
-        array.forEach(function(item) {
-            const date = item.dt_txt.slice(8,10);
-            if(!grouped.hasOwnProperty(date)) {
+        array.forEach(function (item) {
+            const date = item.dt_txt.slice(8, 10);
+            if (!grouped.hasOwnProperty(date)) {
                 this.addDayOfWeek(item);
                 const items = [];
                 items.push(item);
                 grouped[date] = items;
-            }
-            else {
+            } else {
                 grouped[date].push(item);
             }
         }, this);
@@ -51,12 +60,13 @@ class App extends Component {
         return grouped;
     }
 
+    makeCall = (city, country) => {
 
-    componentDidMount() {
+        const APIkey = process.env.REACT_APP_API_KEY;
 
         let urls = [
-            'https://api.openweathermap.org/data/2.5/weather?q=London&appid=0ca4eb97fc6746f542157b9bed567279&units=metric',
-            'https://api.openweathermap.org/data/2.5/forecast?q=London&appid=0ca4eb97fc6746f542157b9bed567279&units=metric',
+            'https://api.openweathermap.org/data/2.5/weather?q=' + city + ',' + country + '&appid=' + APIkey + '&units=metric',
+            'https://api.openweathermap.org/data/2.5/forecast?q=' + city + ',' + country + '&appid=' + APIkey + '&units=metric',
         ];
 
         // map every url to the promise of the fetch
@@ -89,7 +99,7 @@ class App extends Component {
                 const todayForecast = data2.list.filter(item => this.isToday(item.dt));
                 const groupedForecast = this.groupBy(data2.list);
 
-              this.setState({weatherInfo, todayForecast, groupedForecast});
+                this.setState({weatherInfo, todayForecast, groupedForecast});
             }).catch(error => {
             console.log(error);
 
@@ -101,15 +111,27 @@ class App extends Component {
     }
 
 
+    componentDidMount() {
+        //do something
+    }
+
+
     render() {
-        const {weatherInfo, todayForecast, groupedForecast} = this.state;
+
+        const {weatherInfo, todayForecast, groupedForecast, value} = this.state;
+
         return <div className="App">
             <h1>Weather Forecast</h1>
+            <SearchBar submit={this.handleInputSubmit} change={this.handleInputChange} value={value}/>
             {weatherInfo && <ResultsContainer
                 weatherInfo={weatherInfo}
                 todayForecast={todayForecast}
                 groupedForecast={groupedForecast}/>}
+            <script defer
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyi6Yr-xAHYBMJhoEX0BwhwSWl_zDZHqk&callback=initMap">
+            </script>
         </div>
+
     };
 }
 
