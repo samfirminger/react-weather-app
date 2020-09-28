@@ -1,8 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const FiveDayForecastContainer = styled.div`
+    grid-area: Five-Day;
+`;
+
 const ForecastContainer = styled.div`
-    margin-left: 20px;
+    margin-left: 0px;
     display: flex;
     overflow-x: auto;
 `;
@@ -47,7 +51,9 @@ const FiveDayForecast = ({forecast}) => {
 
 
     return (
-        <ForecastContainer>{forecastComponents}</ForecastContainer>
+        <FiveDayForecastContainer className="Five-Day">
+            <ForecastContainer>{forecastComponents}</ForecastContainer>
+        </FiveDayForecastContainer>
     )
 
 };

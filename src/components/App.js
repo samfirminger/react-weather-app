@@ -82,6 +82,8 @@ class App extends Component {
             })
             .then(([data1, data2]) => {
 
+                console.log(data1);
+
                 const weatherInfo = {
                     city: data1.name,
                     country: data1.sys.country,

@@ -1,11 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import HourlyBreakDown from "./HourlyBreakdown";
+import Location from "./Location";
+import CurrentWeather from "./CurrentWeather";
+import TodayForecast from "./TodayForecast";
 import FiveDayForecast from "./FiveDayForecast";
 import {device} from './device';
 
 const ResultsWrapper = styled.div`
 
+    padding-left: 5%;
+    padding-right: 5%;
+    
     @media ${device.mobileS} { 
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -30,46 +35,19 @@ const ResultsWrapper = styled.div`
 
 `;
 
-const Location = styled.h2`
-    grid-area: Location;
-    text-align: left;
-
-`;
-
-const CurrentWeather = styled.div`
-    grid-area: Current;
-
-`;
-
-const HourlyBreakdownContainer = styled.div`
-    grid-area: Hourly;
-    text-align: left;
-`;
-
-const FiveDayForecastContainer = styled.div`
-    grid-area: Five-Day;
-`;
 
 
 const ResultsContainer = ({weatherInfo, todayForecast, groupedForecast}) => {
-    const {city, temp, icon, country} = weatherInfo;
+    const {city, temp, icon, country, highestTemp, lowestTemp} = weatherInfo;
     const forecast = todayForecast;
     const futureForecast = groupedForecast;
 
-
     return (
         <ResultsWrapper>
-            <Location className="Location">{city}, {country}</Location>
-            <CurrentWeather className="Current-Weather">
-                <img alt={"current weather"} src={"http://openweathermap.org/img/wn/" + icon + "@2x.png"}/>
-                <h1>{temp}&#8451;</h1>
-            </CurrentWeather>
-            <HourlyBreakdownContainer className="Hourly">
-                <HourlyBreakDown forecast={forecast}/>
-            </HourlyBreakdownContainer>
-            <FiveDayForecastContainer className="Five-Day">
-                <FiveDayForecast forecast={futureForecast}/>
-            </FiveDayForecastContainer>
+            <Location city={city} country={country}/>
+            <CurrentWeather icon={icon} temp={temp} highestTemp={highestTemp} lowestTemp={lowestTemp}/>
+            <TodayForecast forecast={forecast}/>
+            <FiveDayForecast forecast={futureForecast}/>
         </ResultsWrapper>
     );
 };
