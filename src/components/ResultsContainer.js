@@ -14,7 +14,7 @@ const ResultsWrapper = styled.div`
     @media ${device.mobileS} { 
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-template-rows: 0.5fr 1fr 1fr 1fr;
+        grid-template-rows: 0.5fr 1fr 1fr;
         gap: 1px 1px;
         grid-template-areas:
         "Location Location Location Location"
