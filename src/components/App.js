@@ -1,12 +1,23 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import '../App.css';
+import {device} from "./device";
 import ResultsContainer from './ResultsContainer'
 import SearchBar from './SearchBar'
 
 const AppTitle = styled.h1`
     margin-top: 20px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
+    
+     @media ${device.tablet} {
+        margin-top: 50px;
+        margin-bottom: 50px;
+     }
+     
+      @media ${device.laptop} {
+        margin-top: 70px;
+        margin-bottom: 70px;
+     }
 `;
 
 class App extends Component {

@@ -12,16 +12,32 @@ const ForecastContainer = styled.div`
     float: left;
 `;
 
-const FiveDayDataPoint = styled.div`
+const DayForecast = styled.div`
     flex-wrap: wrap;
     float:left;
     margin-right: 10px;
     min-width: 100%;
     text-align: left;
+    margin-bottom: 20px;
     
     @media ${device.tablet} { 
         min-width: 200px;
     }
+    
+    @media ${device.laptop} { 
+        min-width: 250px;
+        margin-bottom: 0px;
+    }
+    
+    @media ${device.laptopL} { 
+        min-width: 300px;
+    }
+    
+    border-radius: 7px;
+    background-color: rgba(255,255,255,0.5);
+    padding: 10px 0 10px 10px;
+    
+    
 `;
 
 const DayOfWeek = styled.p`
@@ -54,10 +70,10 @@ const FiveDayForecast = ({forecast}) => {
         mintemp = Math.floor(mintemp);
         maxtemp = Math.floor(maxtemp);
 
-        const dayForecast = <FiveDayDataPoint key={forecast[property][0].dayOfweek}>
+        const dayForecast = <DayForecast key={forecast[property][0].dayOfweek}>
             <DayOfWeek>{forecast[property][0].dayOfweek} {property}</DayOfWeek>
             <Temps>{maxtemp}&#8451; / {mintemp}&#8451;</Temps>
-        </FiveDayDataPoint>;
+        </DayForecast>;
 
         forecastComponents.push(dayForecast);
     }

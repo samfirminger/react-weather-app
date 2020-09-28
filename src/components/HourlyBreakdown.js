@@ -18,6 +18,8 @@ const HourData = styled.div`
     margin: 0px 5px;
     border-radius: 5px;
     text-align: center;
+    border-radius: 7px;
+    background-color: rgba(255,255,255,0.5);
 `;
 
 const Hour = styled.p`

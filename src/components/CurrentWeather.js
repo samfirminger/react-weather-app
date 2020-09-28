@@ -7,7 +7,6 @@ const CurrentWeatherContainer = styled.div`
     grid-area: Current;
     display: flex;
     align-items: center;
-    margin-left: 50px;
 
      @media ${device.tablet} { 
         margin-left: 100px;
