@@ -29,9 +29,6 @@ const DayForecast = styled.div`
         margin-bottom: 0px;
     }
     
-    @media ${device.laptopL} { 
-        min-width: 300px;
-    }
     
     border-radius: 7px;
     background-color: rgba(255,255,255,0.5);
