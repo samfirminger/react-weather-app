@@ -1,8 +1,13 @@
 import React, {Component} from 'react';
+import styled from 'styled-components';
 import '../App.css';
 import ResultsContainer from './ResultsContainer'
 import SearchBar from './SearchBar'
 
+const AppTitle = styled.h1`
+    margin-top: 20px;
+    margin-bottom: 50px;
+`;
 
 class App extends Component {
 
@@ -15,7 +20,6 @@ class App extends Component {
             city: '',
             country: '',
         }
-
     }
 
     isToday = (date) => {
@@ -113,26 +117,17 @@ class App extends Component {
         });
     }
 
-
-    componentDidMount() {
-        //do something
-    }
-
-
     render() {
 
         const {weatherInfo, todayForecast, groupedForecast, value} = this.state;
 
         return <div className="App">
-            <h1>Weather Forecast</h1>
+            <AppTitle>Weather Forecast</AppTitle>
             <SearchBar submit={this.handleInputSubmit} change={this.handleInputChange} value={value}/>
             {weatherInfo && <ResultsContainer
                 weatherInfo={weatherInfo}
                 todayForecast={todayForecast}
                 groupedForecast={groupedForecast}/>}
-            <script defer
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyi6Yr-xAHYBMJhoEX0BwhwSWl_zDZHqk&callback=initMap">
-            </script>
         </div>
 
     };
