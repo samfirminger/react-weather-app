@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import {device} from "./device";
+import {device} from "../modules/device";
+import {icons} from "../modules/weatherIcons";
 
 
 const CurrentWeatherContainer = styled.div`
@@ -42,15 +43,17 @@ const LowAndHighTemp = styled.h3`
 `;
 
 
-const CurrentWeather = ({icon, temp, highestTemp, lowestTemp, description}) => {
+const CurrentWeather = ({code, icon, temp, highestTemp, lowestTemp, description}) => {
 
     highestTemp = Math.round(highestTemp);
     lowestTemp = Math.round(lowestTemp);
     description = description.charAt(0).toUpperCase() + description.slice(1);
 
+    const weatherIconSrc = icons.getWeatherIcon(code, icon);
+
     return (
         <CurrentWeatherContainer className="Current-Weather">
-            <WeatherIcon alt={"current weather"} src={"http://openweathermap.org/img/wn/" + icon + "@2x.png"}/>
+            <WeatherIcon alt={"current weather"} src={weatherIconSrc}/>
             <WeatherData>
                 <CurrentTemp>{temp}&#8451;</CurrentTemp>
                 <WeatherDescription>{description}</WeatherDescription>

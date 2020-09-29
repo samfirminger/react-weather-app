@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {icons} from "../modules/weatherIcons";
 
 
 const HourlyBreakdownWrapper = styled.div`
@@ -40,8 +41,10 @@ const HourlyBreakDown = ({forecast}) => {
     const list = forecast.map(function (item) {
         const hour = item.dt_txt.substring(11, 16);
         const temp = Math.floor(item.main.temp);
+        const weatherIconSrc = icons.getWeatherIcon(item.weather[0].id, item.weather[0].icon);
+
         return <HourData key={item.dt_txt}>
-            <HourWeatherIcon src={"http://openweathermap.org/img/wn/" +  item.weather[0].icon + "@2x.png"}/>
+            <HourWeatherIcon src={weatherIconSrc}/>
             <Hour>{hour}</Hour>
             <HourTemp>{temp}&#8451;</HourTemp>
         </HourData>;

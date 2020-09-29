@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import '../App.css';
-import {device} from "./device";
+import {device} from "../modules/device";
 import ResultsContainer from './ResultsContainer'
 import SearchBar from './SearchBar'
 
@@ -97,6 +97,7 @@ class App extends Component {
             .then(([current, forecast]) => {
 
                 const weatherInfo = {
+                    code: current.weather[0].id,
                     city: current.name,
                     country: current.sys.country,
                     description: current.weather[0].description,
