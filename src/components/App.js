@@ -49,7 +49,6 @@ class App extends Component {
     }
 
     handleInputChange = ({suggestion}) => {
-        console.log(suggestion);
         this.setState({
             city: suggestion.name,
             country: suggestion.countryCode
@@ -95,27 +94,26 @@ class App extends Component {
                 }
                 throw Error(res1.statusText, res2.statusText);
             })
-            .then(([data1, data2]) => {
-
-                console.log(data1);
-                console.log(data2);
+            .then(([current, forecast]) => {
 
                 const weatherInfo = {
-                    city: data1.name,
-                    country: data1.sys.country,
-                    description: data1.weather[0].description,
-                    main: data1.weather[0].main,
-                    temp: Math.floor(data1.main.temp),
-                    highestTemp: data1.main.temp_max,
-                    lowestTemp: data1.main.temp_min,
-                    clouds: data1.clouds.all,
-                    humidity: data1.main.humidity,
-                    wind: data1.wind.speed,
-                    icon: data1.weather[0].icon,
+                    city: current.name,
+                    country: current.sys.country,
+                    description: current.weather[0].description,
+                    main: current.weather[0].main,
+                    temp: Math.floor(current.main.temp),
+                    highestTemp: current.main.temp_max,
+                    lowestTemp: current.main.temp_min,
+                    clouds: current.clouds.all,
+                    humidity: current.main.humidity,
+                    wind: current.wind.speed,
+                    icon: current.weather[0].icon,
+                    timezone: forecast.city.timezone
                 };
 
-                const todayForecast = data2.list.filter(item => this.isToday(item.dt));
-                const groupedForecast = this.groupBy(data2.list);
+                //const todayForecast = data2.list.filter(item => this.isToday(item.dt));
+                const todayForecast = forecast.list.slice(0, 6);
+                const groupedForecast = this.groupBy(forecast.list);
 
                 this.setState({weatherInfo, todayForecast, groupedForecast});
             }).catch(error => {

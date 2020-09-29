@@ -38,14 +38,14 @@ const ResultsWrapper = styled.div`
 
 
 const ResultsContainer = ({weatherInfo, todayForecast, groupedForecast}) => {
-    const {city, temp, icon, country, highestTemp, lowestTemp} = weatherInfo;
+    const {city, temp, icon, country, highestTemp, lowestTemp, description} = weatherInfo;
     const forecast = todayForecast;
     const futureForecast = groupedForecast;
 
     return (
         <ResultsWrapper>
             <Location city={city} country={country}/>
-            <CurrentWeather icon={icon} temp={temp} highestTemp={highestTemp} lowestTemp={lowestTemp}/>
+            <CurrentWeather icon={icon} temp={temp} highestTemp={highestTemp} lowestTemp={lowestTemp} description={description}/>
             <TodayForecast forecast={forecast}/>
             <FiveDayForecast forecast={futureForecast}/>
         </ResultsWrapper>

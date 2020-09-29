@@ -32,22 +32,28 @@ const CurrentTemp = styled.h1`
     margin-bottom: 0;
 `;
 
+const WeatherDescription = styled.h3`
+    text-align: left;
+`;
+
 const LowAndHighTemp = styled.h3`
     margin-top: 0;
     text-align: left;
 `;
 
 
-const CurrentWeather = ({icon, temp, highestTemp, lowestTemp}) => {
+const CurrentWeather = ({icon, temp, highestTemp, lowestTemp, description}) => {
 
     highestTemp = Math.round(highestTemp);
     lowestTemp = Math.round(lowestTemp);
+    description = description.charAt(0).toUpperCase() + description.slice(1);
 
     return (
         <CurrentWeatherContainer className="Current-Weather">
             <WeatherIcon alt={"current weather"} src={"http://openweathermap.org/img/wn/" + icon + "@2x.png"}/>
             <WeatherData>
                 <CurrentTemp>{temp}&#8451;</CurrentTemp>
+                <WeatherDescription>{description}</WeatherDescription>
                 <LowAndHighTemp>H: {highestTemp}&#8451; L: {lowestTemp}&#8451;</LowAndHighTemp>
             </WeatherData>
         </CurrentWeatherContainer>

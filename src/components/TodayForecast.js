@@ -6,6 +6,8 @@ import HourlyBreakDown from "./HourlyBreakdown";
 const HourlyBreakdownContainer = styled.div`
     grid-area: Hourly;
     text-align: left;
+    margin-top: auto;
+    margin-bottom: auto;
 `;
 
 
