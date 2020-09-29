@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {device} from "../modules/device";
+import {icons} from "../modules/weatherIcons";
 
 const FiveDayForecastContainer = styled.div`
     grid-area: Five-Day;
@@ -37,12 +38,30 @@ const DayForecast = styled.div`
     
 `;
 
+const HourWeatherIcon = styled.img`
+    height: 50px;
+    width: 50px;      
+`;
+
 const DayOfWeek = styled.p`
     margin-bottom: 0;
  `;
 
 const Temps = styled.p`
     margin-top: 0.5em;
+`;
+
+const InfoWrapper = styled.div`
+    float: left;
+    width: 80%;
+    
+    @media ${device.tablet} { 
+        width: 68%;
+    }
+    
+    @media ${device.laptop} { 
+        width: 75%;
+    }
 `;
 
 const FiveDayForecast = ({forecast}) => {
@@ -67,9 +86,15 @@ const FiveDayForecast = ({forecast}) => {
         mintemp = Math.floor(mintemp);
         maxtemp = Math.floor(maxtemp);
 
+        //TODO work out how to get an avg icon for a predicted day
+        const weatherIconSrc = icons.getWeatherIcon(forecast[property][0].weather[0].id, forecast[property][0].weather[0].icon);
+
         const dayForecast = <DayForecast key={forecast[property][0].dayOfweek}>
-            <DayOfWeek>{forecast[property][0].dayOfweek} {property}</DayOfWeek>
-            <Temps>{maxtemp}&#8451; / {mintemp}&#8451;</Temps>
+            <InfoWrapper>
+                <DayOfWeek>{forecast[property][0].dayOfweek} {property}</DayOfWeek>
+                <Temps>{maxtemp}&#8451; / {mintemp}&#8451;</Temps>
+            </InfoWrapper>
+            <HourWeatherIcon src={weatherIconSrc}/>
         </DayForecast>;
 
         forecastComponents.push(dayForecast);
