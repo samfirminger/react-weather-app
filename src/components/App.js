@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import '../App.css';
 import {device} from "../modules/device";
 import ResultsContainer from './ResultsContainer'
+import ErrorResponse from './ErrorResponse';
 import SearchBar from './SearchBar'
 
 const AppTitle = styled.h1`
@@ -115,11 +116,11 @@ class App extends Component {
                 //const todayForecast = data2.list.filter(item => this.isToday(item.dt));
                 const todayForecast = forecast.list.slice(0, 6);
                 const groupedForecast = this.groupBy(forecast.list);
+                const error = false;
 
-                this.setState({weatherInfo, todayForecast, groupedForecast});
+                this.setState({error, weatherInfo, todayForecast, groupedForecast});
             }).catch(error => {
             console.log(error);
-
             this.setState({
                 error: true,
                 weatherInfo: null,
@@ -129,11 +130,12 @@ class App extends Component {
 
     render() {
 
-        const {weatherInfo, todayForecast, groupedForecast, value} = this.state;
+        const {weatherInfo, todayForecast, groupedForecast, value, error} = this.state;
 
         return <div className="App">
-            <AppTitle>Weather Forecast</AppTitle>
-            <SearchBar submit={this.handleInputSubmit} change={this.handleInputChange} value={value}/>
+            <AppTitle>ForecastApp</AppTitle>
+            <SearchBar change={this.handleInputChange} value={value}/>
+            {error && <ErrorResponse/>}
             {weatherInfo && <ResultsContainer
                 weatherInfo={weatherInfo}
                 todayForecast={todayForecast}

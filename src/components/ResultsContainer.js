@@ -35,8 +35,6 @@ const ResultsWrapper = styled.div`
 
 `;
 
-
-
 const ResultsContainer = ({weatherInfo, todayForecast, groupedForecast}) => {
     const {code, city, temp, icon, country, highestTemp, lowestTemp, description} = weatherInfo;
     const forecast = todayForecast;

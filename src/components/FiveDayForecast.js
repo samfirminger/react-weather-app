@@ -20,6 +20,9 @@ const DayForecast = styled.div`
     min-width: 100%;
     text-align: left;
     margin-bottom: 20px;
+    border-radius: 7px;
+    background-color: rgba(255,255,255,0.5);
+    padding: 10px 0 10px 10px;
     
     @media ${device.tablet} { 
         min-width: 200px;
@@ -29,13 +32,6 @@ const DayForecast = styled.div`
         min-width: 250px;
         margin-bottom: 0px;
     }
-    
-    
-    border-radius: 7px;
-    background-color: rgba(255,255,255,0.5);
-    padding: 10px 0 10px 10px;
-    
-    
 `;
 
 const HourWeatherIcon = styled.img`
@@ -86,8 +82,9 @@ const FiveDayForecast = ({forecast}) => {
         mintemp = Math.floor(mintemp);
         maxtemp = Math.floor(maxtemp);
 
-        //TODO work out how to get an avg icon for a predicted day
-        const weatherIconSrc = icons.getWeatherIcon(forecast[property][0].weather[0].id, forecast[property][0].weather[0].icon);
+        //use the midday entry
+        const midday = 4;
+        const weatherIconSrc = icons.getWeatherIcon(forecast[property][midday].weather[0].id, forecast[property][midday].weather[0].icon);
 
         const dayForecast = <DayForecast key={forecast[property][0].dayOfweek}>
             <InfoWrapper>

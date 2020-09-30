@@ -27,11 +27,9 @@ const StyledAlgolia = styled(AlgoliaPlaces)`
 `;
 
 
-const SearchBar = ({value, submit, change}) => {
+const SearchBar = ({value, change}) => {
 
-    return (
-        <form onSubmit={submit}>
-            <CityInputWrapper>
+    return (<CityInputWrapper>
                 <StyledAlgolia
                     placeholder='e.g. London'
                     options={{
@@ -41,9 +39,13 @@ const SearchBar = ({value, submit, change}) => {
                     }}
                     value={value}
                     onChange={change}
+                    onClear={() =>
+                        console.log('Fired when the input is cleared.')}
+                    onError={({ message }) =>
+                        console.log('Fired when we could not make the request to Algolia Places servers for any reason but reaching your rate limit.')}
                 />
             </CityInputWrapper>
-        </form>
+
     )
 };
 
