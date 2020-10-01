@@ -5,11 +5,22 @@ import CurrentWeather from "./CurrentWeather";
 import TodayForecast from "./TodayForecast";
 import FiveDayForecast from "./FiveDayForecast";
 import {device} from '../modules/device';
+import {keyframes} from 'styled-components';
+
+const fadeIn = keyframes`
+   to {
+        opacity: 1;
+        visibility: visible;
+        top: 0;
+  }
+`;
 
 const ResultsWrapper = styled.div`
 
     padding-left: 5%;
     padding-right: 5%;
+    opacity: 0;
+    animation: ${fadeIn} 1s 0.3s forwards;
     
     @media ${device.mobileS} { 
         display: grid;
@@ -32,7 +43,6 @@ const ResultsWrapper = styled.div`
         "Current Current Hourly Hourly"
         "Five-Day Five-Day Five-Day Five-Day";
     }
-
 `;
 
 const ResultsContainer = ({weatherInfo, todayForecast, groupedForecast}) => {
@@ -43,7 +53,8 @@ const ResultsContainer = ({weatherInfo, todayForecast, groupedForecast}) => {
     return (
         <ResultsWrapper>
             <Location city={city} country={country}/>
-            <CurrentWeather code={code} icon={icon} temp={temp} highestTemp={highestTemp} lowestTemp={lowestTemp} description={description}/>
+            <CurrentWeather code={code} icon={icon} temp={temp} highestTemp={highestTemp} lowestTemp={lowestTemp}
+                            description={description}/>
             <TodayForecast forecast={forecast}/>
             <FiveDayForecast forecast={futureForecast}/>
         </ResultsWrapper>

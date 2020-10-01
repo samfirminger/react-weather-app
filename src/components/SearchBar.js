@@ -8,7 +8,9 @@ const CityInputWrapper = styled.div`
     text-align: left;
     display: flex;
     justify-content: center;
-    
+    margin-top: 15%;
+    transition: all 0.8s ease;
+    ${props => props.search ? 'margin-top: 0px' : 'margin-top: 200px'}
 `;
 
 
@@ -27,9 +29,9 @@ const StyledAlgolia = styled(AlgoliaPlaces)`
 `;
 
 
-const SearchBar = ({value, change}) => {
+const SearchBar = ({value, change, search}) => {
 
-    return (<CityInputWrapper>
+    return (<CityInputWrapper className={'test'} search={search}>
                 <StyledAlgolia
                     placeholder='e.g. London'
                     options={{
@@ -45,7 +47,6 @@ const SearchBar = ({value, change}) => {
                         console.log('Fired when we could not make the request to Algolia Places servers for any reason but reaching your rate limit.')}
                 />
             </CityInputWrapper>
-
     )
 };
 

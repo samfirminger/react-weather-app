@@ -3,34 +3,43 @@ import styled from 'styled-components';
 import {device} from "../modules/device";
 import {icons} from "../modules/weatherIcons";
 
-
 const CurrentWeatherContainer = styled.div`
     grid-area: Current;
     display: flex;
     align-items: center;
-
-     @media ${device.tablet} { 
-        margin-left: 100px;
-     }
-     
-     @media ${device.laptop} {
-        margin-left: 150px;
-     }
+    
+    @media ${device.laptop} {
+       margin-left: 150px;
+    }
 `;
 
 const WeatherIcon = styled.img`
-    width: 60%;
+    width: 55%;
     float: left;
+    
+    @media ${device.laptop} {
+        width: 60%
+    }
 `;
 
 const WeatherData = styled.div`
-    width: 40%;
+    width: 45%;
     float: left;
+    overflow-x: hidden;
+    
+    @media ${device.laptop} {
+        width: 40%
+    }
 `;
 
 const CurrentTemp = styled.h1`
     text-align: left;
+    font-size: 60px;
     margin-bottom: 0;
+    
+    @media ${device.laptop} {
+        font-size: 70px;
+    }
 `;
 
 const WeatherDescription = styled.h3`

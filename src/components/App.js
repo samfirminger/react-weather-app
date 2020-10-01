@@ -1,25 +1,10 @@
 import React, {Component} from 'react';
-import styled from 'styled-components';
 import '../App.css';
-import {device} from "../modules/device";
+import AppTitle from "./AppTitle";
 import ResultsContainer from './ResultsContainer'
 import ErrorResponse from './ErrorResponse';
 import SearchBar from './SearchBar'
 
-const AppTitle = styled.h1`
-    margin-top: 20px;
-    margin-bottom: 30px;
-    
-     @media ${device.tablet} {
-        margin-top: 50px;
-        margin-bottom: 50px;
-     }
-     
-      @media ${device.laptop} {
-        margin-top: 70px;
-        margin-bottom: 70px;
-     }
-`;
 
 class App extends Component {
 
@@ -31,6 +16,7 @@ class App extends Component {
             groupedForecast: null,
             city: '',
             country: '',
+            search: false,
         }
     }
 
@@ -52,7 +38,8 @@ class App extends Component {
     handleInputChange = ({suggestion}) => {
         this.setState({
             city: suggestion.name,
-            country: suggestion.countryCode
+            country: suggestion.countryCode,
+            search: true,
         });
         this.makeCall(this.state.city, this.state.country);
     };
@@ -89,11 +76,11 @@ class App extends Component {
 
         // Promise.all waits until all jobs are resolved
         Promise.all(requests)
-            .then(([res1, res2]) => {
-                if (res1.ok && res2.ok) {
-                    return Promise.all([res1.json(), res2.json()]);
+            .then(([request1, request2]) => {
+                if (request1.ok && request2.ok) {
+                    return Promise.all([request1.json(), request2.json()]);
                 }
-                throw Error(res1.statusText, res2.statusText);
+                throw Error(request1.statusText);
             })
             .then(([current, forecast]) => {
 
@@ -120,21 +107,21 @@ class App extends Component {
 
                 this.setState({error, weatherInfo, todayForecast, groupedForecast});
             }).catch(error => {
-            console.log(error);
-            this.setState({
-                error: true,
-                weatherInfo: null,
+                console.log(error);
+                this.setState({
+                    error: true,
+                    weatherInfo: null,
+                });
             });
-        });
     }
 
     render() {
 
-        const {weatherInfo, todayForecast, groupedForecast, value, error} = this.state;
+        const {weatherInfo, todayForecast, groupedForecast, value, error, search} = this.state;
 
         return <div className="App">
-            <AppTitle>ForecastApp</AppTitle>
-            <SearchBar change={this.handleInputChange} value={value}/>
+            <AppTitle/>
+            <SearchBar change={this.handleInputChange} value={value} search={search}/>
             {error && <ErrorResponse/>}
             {weatherInfo && <ResultsContainer
                 weatherInfo={weatherInfo}
