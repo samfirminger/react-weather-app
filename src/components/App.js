@@ -41,7 +41,7 @@ class App extends Component {
             country: suggestion.countryCode,
             search: true,
         });
-        this.makeCall(this.state.city, this.state.country);
+        this.sendRequest(this.state.city, this.state.country);
     };
 
     groupBy = (array) => {
@@ -62,9 +62,9 @@ class App extends Component {
         return grouped;
     }
 
-    makeCall = (city, country) => {
+    sendRequest = (city, country) => {
 
-        const APIkey = process.env.REACT_APP_API_KEY;
+        const APIkey = process.env.REACT_APP_OWM_API_KEY;
 
         let urls = [
             'https://api.openweathermap.org/data/2.5/weather?q=' + city + ',' + country + '&appid=' + APIkey + '&units=metric',
@@ -123,10 +123,7 @@ class App extends Component {
             <AppTitle/>
             <SearchBar change={this.handleInputChange} value={value} search={search}/>
             {error && <ErrorResponse/>}
-            {weatherInfo && <ResultsContainer
-                weatherInfo={weatherInfo}
-                todayForecast={todayForecast}
-                groupedForecast={groupedForecast}/>}
+            {weatherInfo && <ResultsContainer weatherInfo={weatherInfo} todayForecast={todayForecast} groupedForecast={groupedForecast}/>}
         </div>
 
     };

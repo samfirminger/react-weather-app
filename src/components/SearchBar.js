@@ -15,8 +15,10 @@ const CityInputWrapper = styled.div`
 
 
 const StyledAlgolia = styled(AlgoliaPlaces)`
+
+    border-radius: 8px;
     @media only screen and (min-width: 320px) {
-        width: 200px;
+        width: 300px;
     }
 
     @media only screen and (min-width: 768px) {
@@ -31,20 +33,18 @@ const StyledAlgolia = styled(AlgoliaPlaces)`
 
 const SearchBar = ({value, change, search}) => {
 
-    return (<CityInputWrapper className={'test'} search={search}>
+    const APIkey = process.env.REACT_APP_ALGOLIA_API_KEY;
+
+    return (<CityInputWrapper search={search}>
                 <StyledAlgolia
                     placeholder='e.g. London'
                     options={{
                         appId: 'plVPZLHU2YCV',
-                        apiKey: '9873dda9187da827786d0e05a6c6490b',
+                        apiKey: APIkey,
                         language: 'gb',
                     }}
                     value={value}
                     onChange={change}
-                    onClear={() =>
-                        console.log('Fired when the input is cleared.')}
-                    onError={({ message }) =>
-                        console.log('Fired when we could not make the request to Algolia Places servers for any reason but reaching your rate limit.')}
                 />
             </CityInputWrapper>
     )
