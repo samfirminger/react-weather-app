@@ -1,19 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import {device} from '../modules/device';
+import {fadeIn} from './FadeIn'
 import Location from "./Location";
 import CurrentWeather from "./CurrentWeather";
 import TodayForecast from "./TodayForecast";
 import FiveDayForecast from "./FiveDayForecast";
-import {device} from '../modules/device';
-import {keyframes} from 'styled-components';
-
-const fadeIn = keyframes`
-   to {
-        opacity: 1;
-        visibility: visible;
-        top: 0;
-  }
-`;
 
 const ResultsWrapper = styled.div`
 
