@@ -6,9 +6,17 @@ import {icons} from "../modules/weatherIcons";
 import {fadeIn} from "./FadeIn";
 
 const FiveDayForecastContainer = styled.div`
-    grid-area: Five-Day;
+    grid-area: five-day;
     opacity: 0;
     animation: ${fadeIn} 1s 1.2s forwards;
+    
+    @media ${device.tablet} { 
+        margin-top: 10px;
+    }
+    
+    @media ${device.laptopL} { 
+        margin-top: 30px;
+    }
 `;
 
 const ForecastContainer = styled.div`
@@ -50,7 +58,7 @@ const Temps = styled.p`
 
 const InfoWrapper = styled.div`
     float: left;
-    width: 79x%;
+    width: 79%;
     
     @media ${device.tablet} { 
         width: 88%;
@@ -104,7 +112,7 @@ const FiveDayForecast = ({forecast}) => {
 
 
     return (
-        <FiveDayForecastContainer className="Five-Days">
+        <FiveDayForecastContainer className="five-day">
             <ForecastContainer>{forecastComponents}</ForecastContainer>
         </FiveDayForecastContainer>
     )

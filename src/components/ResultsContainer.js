@@ -21,10 +21,10 @@ const ResultsWrapper = styled.div`
         grid-template-rows: 0.5fr 1fr 1fr;
         gap: 1px 1px;
         grid-template-areas:
-        "Location Location Location Location"
-        "Current Current Current Current"
-        "Hourly Hourly Hourly Hourly"
-        "Five-Day Five-Day Five-Day Five-Day";
+        "location location location location"
+        "current current current current"
+        "hourly hourly hourly hourly"
+        "five-day five-day five-day five-day";
     }
     
     @media ${device.tablet} {
@@ -32,9 +32,14 @@ const ResultsWrapper = styled.div`
         grid-template-rows: auto 0.5fr 1fr;
         gap: 1px 1px;
         grid-template-areas:
-        "Location Location Location Location"
-        "Current Current Hourly Hourly"
-        "Five-Day Five-Day Five-Day Five-Day";
+        "location location location location"
+        "current current hourly hourly"
+        "five-day five-day five-day five-day";
+    }
+    
+    @media ${device.laptop} {
+        padding-left: 10%;
+        padding-right: 10%;
     }
 `;
 

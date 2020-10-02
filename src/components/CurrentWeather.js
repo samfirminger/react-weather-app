@@ -5,7 +5,7 @@ import {device} from "../modules/device";
 import {icons} from "../modules/weatherIcons";
 
 const CurrentWeatherContainer = styled.div`
-    grid-area: Current;
+    grid-area: current;
     display: flex;
     align-items: center;
     
@@ -62,7 +62,7 @@ const CurrentWeather = ({code, icon, temp, highestTemp, lowestTemp, description}
     const weatherIconSrc = icons.getWeatherIcon(code, icon);
 
     return (
-        <CurrentWeatherContainer className="Current-Weather">
+        <CurrentWeatherContainer className="current">
             <WeatherIcon alt={"current weather"} src={weatherIconSrc}/>
             <WeatherData>
                 <CurrentTemp>{temp}&#8451;</CurrentTemp>

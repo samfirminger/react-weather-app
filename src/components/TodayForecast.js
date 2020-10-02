@@ -5,7 +5,7 @@ import HourlyBreakDown from "./HourlyBreakdown";
 
 
 const HourlyBreakdownContainer = styled.div`
-    grid-area: Hourly;
+    grid-area: hourly;
     text-align: left;
     margin-top: auto;
     margin-bottom: auto;
@@ -15,7 +15,7 @@ const HourlyBreakdownContainer = styled.div`
 const TodayForecast = ({forecast}) => {
 
     return (
-        <HourlyBreakdownContainer className="Hourly">
+        <HourlyBreakdownContainer className="hourly">
             <HourlyBreakDown forecast={forecast}/>
         </HourlyBreakdownContainer>
     )
