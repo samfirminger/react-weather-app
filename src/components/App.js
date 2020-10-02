@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import '../App.css';
+import {GlobalStyle} from "./GlobalStyle";
 import AppTitle from "./AppTitle";
 import ResultsContainer from './ResultsContainer'
 import ErrorResponse from './ErrorResponse';
-import SearchBar from './SearchBar'
+import SearchBar from './SearchBar';
+
 
 
 class App extends Component {
@@ -16,15 +17,8 @@ class App extends Component {
             groupedForecast: null,
             city: '',
             country: '',
-            search: false,
+            hasSearched: false,
         }
-    }
-
-    isToday = (date) => {
-        const today = new Date().setHours(0, 0, 0, 0);
-        const thatDay = new Date(date * 1000).setHours(0, 0, 0, 0);
-
-        return (today === thatDay);
     }
 
     addDayOfWeek = (item) => {
@@ -121,6 +115,7 @@ class App extends Component {
         const {weatherInfo, todayForecast, groupedForecast, value, error, hasSearched} = this.state;
 
         return <div className="App">
+            <GlobalStyle/>
             <AppTitle/>
             <SearchBar change={this.handleInputChange} value={value} hasSearched={hasSearched}/>
             {error && <ErrorResponse/>}

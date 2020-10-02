@@ -8,7 +8,7 @@ const CurrentWeatherContainer = styled.div`
     display: flex;
     align-items: center;
     
-    @media ${device.laptop} {
+    @media ${device.laptopL} {
        margin-left: 150px;
     }
 `;
