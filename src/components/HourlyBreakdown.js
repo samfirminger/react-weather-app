@@ -1,8 +1,8 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import styled from 'styled-components';
 import {icons} from "../modules/weatherIcons";
 import {fadeIn} from "./FadeIn";
-
 
 const HourlyBreakdownWrapper = styled.div`
     position: relative;
@@ -85,7 +85,10 @@ const HourlyBreakDown = ({forecast}) => {
             {list}
         </HourlyBreakdownWrapper>
     )
+};
 
+HourlyBreakDown.propTypes = {
+    forecast: PropTypes.array
 };
 
 export default HourlyBreakDown;

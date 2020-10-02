@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from "prop-types";
 import {device} from "../modules/device";
 import {icons} from "../modules/weatherIcons";
 import {fadeIn} from "./FadeIn";
@@ -108,6 +109,10 @@ const FiveDayForecast = ({forecast}) => {
         </FiveDayForecastContainer>
     )
 
+};
+
+FiveDayForecast.propTypes = {
+    forecast: PropTypes.object
 };
 
 export default FiveDayForecast;

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from "prop-types";
 import {device} from '../modules/device';
 import {fadeIn} from './FadeIn'
 import Location from "./Location";
@@ -37,20 +38,24 @@ const ResultsWrapper = styled.div`
     }
 `;
 
-const ResultsContainer = ({weatherInfo, todayForecast, groupedForecast}) => {
+const ResultsContainer = ({weatherInfo, todayForecast, weekForecast}) => {
     const {code, city, temp, icon, country, highestTemp, lowestTemp, description} = weatherInfo;
-    const forecast = todayForecast;
-    const futureForecast = groupedForecast;
 
     return (
         <ResultsWrapper>
             <Location city={city} country={country}/>
             <CurrentWeather code={code} icon={icon} temp={temp} highestTemp={highestTemp} lowestTemp={lowestTemp}
                             description={description}/>
-            <TodayForecast forecast={forecast}/>
-            <FiveDayForecast forecast={futureForecast}/>
+            <TodayForecast forecast={todayForecast}/>
+            <FiveDayForecast forecast={weekForecast}/>
         </ResultsWrapper>
     );
+};
+
+ResultsContainer.propTypes = {
+    weatherInfo: PropTypes.object,
+    todayForecast: PropTypes.array,
+    weekForecast: PropTypes.object
 };
 
 export default ResultsContainer;

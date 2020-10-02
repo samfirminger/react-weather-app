@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import styled from 'styled-components';
 import {device} from "../modules/device";
 import {icons} from "../modules/weatherIcons";
@@ -70,6 +71,15 @@ const CurrentWeather = ({code, icon, temp, highestTemp, lowestTemp, description}
             </WeatherData>
         </CurrentWeatherContainer>
     )
+};
+
+CurrentWeather.propTypes = {
+    code: PropTypes.number,
+    icon: PropTypes.string,
+    temp: PropTypes.number,
+    highestTemp: PropTypes.number,
+    lowestTemp: PropTypes.number,
+    description: PropTypes.string
 };
 
 export default CurrentWeather;

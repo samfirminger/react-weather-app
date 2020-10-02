@@ -14,7 +14,7 @@ class App extends Component {
         this.state = {
             weatherInfo: null,
             todayForecast: null,
-            groupedForecast: null,
+            weekForecast: null,
             city: '',
             country: '',
             hasSearched: false,
@@ -39,22 +39,22 @@ class App extends Component {
         this.sendRequest(this.state.city, this.state.country);
     };
 
-    groupBy = (array) => {
+    groupBy = (result) => {
 
-        const grouped = {};
-        array.forEach(function (item) {
+        const groupedByDay = {};
+        result.forEach(function (item) {
             const date = item.dt_txt.slice(8, 10);
-            if (!grouped.hasOwnProperty(date)) {
+            if (!groupedByDay.hasOwnProperty(date)) {
                 this.addDayOfWeek(item);
                 const items = [];
                 items.push(item);
-                grouped[date] = items;
+                groupedByDay[date] = items;
             } else {
-                grouped[date].push(item);
+                groupedByDay[date].push(item);
             }
         }, this);
 
-        return grouped;
+        return groupedByDay;
     }
 
     sendRequest = (city, country) => {
@@ -95,12 +95,10 @@ class App extends Component {
                     timezone: forecast.city.timezone
                 };
 
-                //const todayForecast = data2.list.filter(item => this.isToday(item.dt));
                 const todayForecast = forecast.list.slice(0, 6);
-                const groupedForecast = this.groupBy(forecast.list);
-                const error = false;
+                const weekForecast = this.groupBy(forecast.list);
 
-                this.setState({error, weatherInfo, todayForecast, groupedForecast});
+                this.setState({error: false, weatherInfo, todayForecast, weekForecast});
             }).catch(error => {
                 console.log(error);
                 this.setState({
@@ -112,16 +110,15 @@ class App extends Component {
 
     render() {
 
-        const {weatherInfo, todayForecast, groupedForecast, value, error, hasSearched} = this.state;
+        const {weatherInfo, todayForecast, weekForecast, inputValue, error, hasSearched} = this.state;
 
         return <div className="App">
             <GlobalStyle/>
             <AppTitle/>
-            <SearchBar change={this.handleInputChange} value={value} hasSearched={hasSearched}/>
+            <SearchBar change={this.handleInputChange} inputValue={inputValue} hasSearched={hasSearched}/>
             {error && <ErrorResponse/>}
-            {weatherInfo && <ResultsContainer weatherInfo={weatherInfo} todayForecast={todayForecast} groupedForecast={groupedForecast}/>}
+            {weatherInfo && <ResultsContainer weatherInfo={weatherInfo} todayForecast={todayForecast} weekForecast={weekForecast}/>}
         </div>
-
     };
 }
 

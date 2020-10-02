@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import AlgoliaPlaces from 'algolia-places-react';
 import styled from 'styled-components';
 import {device} from "../modules/device";
@@ -30,7 +31,7 @@ const StyledAlgolia = styled(AlgoliaPlaces)`
 `;
 
 
-const SearchBar = ({value, change, hasSearched}) => {
+const SearchBar = ({inputValue, change, hasSearched}) => {
 
     const APIkey = process.env.REACT_APP_ALGOLIA_API_KEY;
 
@@ -42,11 +43,17 @@ const SearchBar = ({value, change, hasSearched}) => {
                         apiKey: APIkey,
                         language: 'gb',
                     }}
-                    value={value}
+                    value={inputValue}
                     onChange={change}
                 />
             </CityInputWrapper>
     )
+};
+
+SearchBar.propTypes = {
+    inputValue: PropTypes.string,
+    change: PropTypes.func,
+    hasSearched: PropTypes.bool
 };
 
 export default SearchBar;
