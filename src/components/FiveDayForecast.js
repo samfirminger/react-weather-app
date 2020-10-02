@@ -2,9 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import {device} from "../modules/device";
 import {icons} from "../modules/weatherIcons";
+import {fadeIn} from "./FadeIn";
 
 const FiveDayForecastContainer = styled.div`
     grid-area: Five-Day;
+    opacity: 0;
+    animation: ${fadeIn} 1s 1.2s forwards;
 `;
 
 const ForecastContainer = styled.div`

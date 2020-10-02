@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {icons} from "../modules/weatherIcons";
+import {fadeIn} from "./FadeIn";
 
 
 const HourlyBreakdownWrapper = styled.div`
@@ -10,6 +11,35 @@ const HourlyBreakdownWrapper = styled.div`
     overflow-y: hidden;
     margin-top: 20px;
     margin-bottom: 20px;
+    
+    .hour-block {
+        opacity: 0;
+        animation: ${fadeIn} 1s 0.5s forwards;
+    }
+    
+    .hour-block:nth-child(1) {
+        animation: ${fadeIn} 1s 0.5s forwards;
+    }
+    
+    .hour-block:nth-child(2) {
+         animation: ${fadeIn} 1s 0.6s forwards;
+     }
+    
+    .hour-block:nth-child(3) {
+        animation: ${fadeIn} 1s 0.7s forwards;
+    }
+    
+    .hour-block:nth-child(4) {
+        animation: ${fadeIn} 1s 0.8s forwards;
+    }
+    
+    .hour-block:nth-child(5) {
+        animation: ${fadeIn} 1s 0.9s forwards;
+    }
+    
+    .hour-block:nth-child(6) {
+        animation: ${fadeIn} 1s 1.0s forwards;
+    }
 `;
 
 const HourData = styled.div`
@@ -43,7 +73,7 @@ const HourlyBreakDown = ({forecast}) => {
         const temp = Math.floor(item.main.temp);
         const weatherIconSrc = icons.getWeatherIcon(item.weather[0].id, item.weather[0].icon);
 
-        return <HourData key={item.dt_txt}>
+        return <HourData key={item.dt_txt} className={'hour-block'}>
             <HourWeatherIcon src={weatherIconSrc}/>
             <Hour>{hour}</Hour>
             <HourTemp>{temp}&#8451;</HourTemp>

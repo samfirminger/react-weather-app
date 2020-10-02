@@ -1,6 +1,7 @@
 import React from 'react';
 import AlgoliaPlaces from 'algolia-places-react';
 import styled from 'styled-components';
+import {device} from "../modules/device";
 
 
 const CityInputWrapper = styled.div`
@@ -8,34 +9,32 @@ const CityInputWrapper = styled.div`
     text-align: left;
     display: flex;
     justify-content: center;
-    margin-top: 15%;
     transition: all 0.8s ease;
-    ${props => props.search ? 'margin-top: 0px' : 'margin-top: 200px'}
+    ${props => props.hasSearched ? 'margin-top: 0px' : 'margin-top: 200px'}
 `;
 
 
 const StyledAlgolia = styled(AlgoliaPlaces)`
-
     border-radius: 8px;
-    @media only screen and (min-width: 320px) {
+    @media ${device.mobileS} {
         width: 300px;
     }
 
-    @media only screen and (min-width: 768px) {
+    @media ${device.tablet} { {
         width: 500px;
     }
 
-    @media only screen and (min-width: 1024px) {
+    @media ${device.laptop} { {
         width: 700px;
     }
 `;
 
 
-const SearchBar = ({value, change, search}) => {
+const SearchBar = ({value, change, hasSearched}) => {
 
     const APIkey = process.env.REACT_APP_ALGOLIA_API_KEY;
 
-    return (<CityInputWrapper search={search}>
+    return (<CityInputWrapper hasSearched={hasSearched}>
                 <StyledAlgolia
                     placeholder='e.g. London'
                     options={{

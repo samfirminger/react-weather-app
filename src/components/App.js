@@ -39,7 +39,8 @@ class App extends Component {
         this.setState({
             city: suggestion.name,
             country: suggestion.countryCode,
-            search: true,
+            hasSearched: true,
+            weatherInfo: null,
         });
         this.sendRequest(this.state.city, this.state.country);
     };
@@ -117,11 +118,11 @@ class App extends Component {
 
     render() {
 
-        const {weatherInfo, todayForecast, groupedForecast, value, error, search} = this.state;
+        const {weatherInfo, todayForecast, groupedForecast, value, error, hasSearched} = this.state;
 
         return <div className="App">
             <AppTitle/>
-            <SearchBar change={this.handleInputChange} value={value} search={search}/>
+            <SearchBar change={this.handleInputChange} value={value} hasSearched={hasSearched}/>
             {error && <ErrorResponse/>}
             {weatherInfo && <ResultsContainer weatherInfo={weatherInfo} todayForecast={todayForecast} groupedForecast={groupedForecast}/>}
         </div>
