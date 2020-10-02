@@ -14,6 +14,7 @@ const ForecastContainer = styled.div`
     margin-left: 0px;
     display: inline-block;
     float: left;
+    width: 100%;
 `;
 
 const DayForecast = styled.div`
@@ -27,11 +28,7 @@ const DayForecast = styled.div`
     background-color: rgba(255,255,255,0.5);
     padding: 10px 0 10px 10px;
     
-    @media ${device.tablet} { 
-        min-width: 200px;
-    }
-    
-    @media ${device.laptop} { 
+    @media ${device.laptopL} { 
         min-width: 250px;
         margin-bottom: 0px;
     }
@@ -52,14 +49,18 @@ const Temps = styled.p`
 
 const InfoWrapper = styled.div`
     float: left;
-    width: 80%;
+    width: 79x%;
     
     @media ${device.tablet} { 
-        width: 68%;
+        width: 88%;
     }
     
     @media ${device.laptop} { 
-        width: 75%;
+        width: 90%;
+    }
+    
+    @media ${device.laptopL} { 
+        width: 73%;
     }
 `;
 
