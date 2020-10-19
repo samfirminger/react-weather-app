@@ -3,6 +3,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 To run this locally, you need to create a .env file in the root and sign up for API keys from OpenWeather (https://openweathermap.org/) and AlgoliaPlaces (https://community.algolia.com/places/). Once you have your two api keys, add the following to the .env file:
 
 REACT_APP_OWM_API_KEY={yourOpenWeatherKey}
+
 REACT_APP_ALGOLIA_API_KEY={yourAlgoliaPlacesKey}
 
 Happy forecasting!
