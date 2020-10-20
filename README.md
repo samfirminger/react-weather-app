@@ -1,3 +1,5 @@
+A live hosting of this repository can be found here https://reactweatherproject.herokuapp.com/.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 To run this locally, you need to create a .env file in the root and sign up for API keys from OpenWeather (https://openweathermap.org/) and AlgoliaPlaces (https://community.algolia.com/places/). Once you have your two api keys, add the following to the .env file:
